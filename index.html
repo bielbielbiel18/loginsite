@@ -197,7 +197,7 @@
 
         loginBtn.addEventListener('click', function (e) {
             e.preventDefault();
-            const email = emailInput.value.trim().toLowerCase();
+            const email = emailInput.value.trim(); // Removida a conversão para minúsculas
             const senha = senhaInput.value.trim();
 
             if (usuarios[email] && usuarios[email] === senha) {
