@@ -197,9 +197,10 @@
 
         loginBtn.addEventListener('click', function (e) {
             e.preventDefault();
-            const email = emailInput.value.trim(); // Removida a conversão para minúsculas
+            const email = emailInput.value.trim(); // Removi o toLowerCase() aqui
             const senha = senhaInput.value.trim();
 
+            // Checar se o email existe e se a senha está correta
             if (usuarios[email] && usuarios[email] === senha) {
                 mensagem.style.display = 'none';
                 sucesso.style.display = 'block';
