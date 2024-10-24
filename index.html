@@ -173,7 +173,14 @@
         const usuarios = {
             "ana.lima@gmail.com": "AnaLima123!",
             "carlos.souza@gmail.com": "CarlosSouza456!",
-            // Outros usuários...
+            "mariana.oliveira@gmail.com": "MarianaOliveira789!",
+            "joao.silva@gmail.com": "JoaoSilva012!",
+            "leticia.fernandes@gmail.com": "LeticiaFernandes345!",
+            "gabriel.pereira@gmail.com": "GabrielPereira678!",
+            "maria.santos@gmail.com": "MariaSantos901!",
+            "roberto.almeida@gmail.com": "RobertoAlmeida234!",
+            "fernanda.lima@gmail.com": "FernandaLima567!",
+            "lucas.martins@gmail.com": "LucasMartins890!"
         };
 
         const loginBtn = document.getElementById('loginBtn');
@@ -190,8 +197,8 @@
 
         loginBtn.addEventListener('click', function (e) {
             e.preventDefault();
-            const email = emailInput.value;
-            const senha = senhaInput.value;
+            const email = emailInput.value.trim().toLowerCase();
+            const senha = senhaInput.value.trim();
 
             if (usuarios[email] && usuarios[email] === senha) {
                 mensagem.style.display = 'none';
