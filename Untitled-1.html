@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap">
+    <title>ENTRAR</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f2e6f2;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        a {
+            text-decoration: none;
+            color: #FF69B4;
+        }
+
+        #login {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            flex-direction: column;
+            width: 100%;
+        }
+
+        .caixa {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            max-width: 350px;
+        }
+
+        .email input,
+        .senha input {
+            border-radius: 15px;
+            border: none;
+            width: 100%;
+            max-width: 300px;
+            height: 45px;
+            padding-left: 15px;
+            background-color: #ff85c0;
+            color: #ffffff;
+            margin-bottom: 15px;
+        }
+
+        .senha {
+            position: relative;
+            margin-bottom: 10px;
+        }
+
+        #toggleLabel {
+            font-size: 0.9rem;
+            color: #333;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            margin-top: 15px;
+            gap: 5px;
+        }
+
+        #togglePassword {
+            margin-right: 5px;
+            width: 15px;
+            height: 15px;
+        }
+
+        .entrar input {
+            cursor: pointer;
+            width: 100%;
+            max-width: 150px;
+            height: 45px;
+            border-radius: 20px;
+            border: none;
+            background-color: #FF69B4;
+            color: #ffffff;
+            margin-top: 15px;
+        }
+
+        input::placeholder {
+            color: #ffffff;
+        }
+
+        h1 {
+            color: #FF69B4;
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+        }
+
+        input:focus {
+            outline: none;
+        }
+
+        p {
+            margin-top: 15px;
+            font-size: 0.9rem;
+        }
+
+        /* Ajustes para telas menores */
+        @media (max-width: 600px) {
+            .caixa {
+                padding: 20px;
+            }
+
+            h1 {
+                font-size: 1.5rem;
+            }
+
+            .entrar input {
+                max-width: 100%;
+                height: 40px;
+            }
+
+            .email input,
+            .senha input {
+                height: 40px;
+            }
+
+            p {
+                font-size: 0.85rem;
+            }
+        }
+    </style>
+</head>
+
+<body id="principal">
+
+    <div id="login">
+        <div class="caixa">
+            <h1>LOGIN</h1>
+
+            <div class="email">
+                <input type="email" id="email" placeholder="Email">
+            </div>
+
+            <div class="senha">
+                <input type="password" id="senha" placeholder="Senha">
+                <label for="togglePassword" id="toggleLabel">
+                    <input type="checkbox" id="togglePassword"> Mostrar senha
+                </label>
+            </div>
+
+            <div class="entrar">
+                <p>É prestador de serviços da DP World? <a href="cadastro.html">Use a nossa plataforma.</a></p>
+                <input type="submit" id="loginBtn" value="Entrar">
+            </div>
+
+            <p id="mensagem" style="color: red; display: none;">Email ou senha inválidos!</p>
+            <p id="sucesso" style="color: green; display: none;">Bem-vindo!</p>
+        </div>
+    </div>
+
+    <script>
+        const usuarios = {
+            "ana.lima@gmail.com": "AnaLima123!",
+            "carlos.souza@gmail.com": "CarlosSouza456!",
+            // Outros usuários...
+        };
+
+        const loginBtn = document.getElementById('loginBtn');
+        const emailInput = document.getElementById('email');
+        const senhaInput = document.getElementById('senha');
+        const mensagem = document.getElementById('mensagem');
+        const sucesso = document.getElementById('sucesso');
+        const togglePassword = document.getElementById('togglePassword');
+
+        togglePassword.addEventListener('click', function () {
+            const type = senhaInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            senhaInput.setAttribute('type', type);
+        });
+
+        loginBtn.addEventListener('click', function (e) {
+            e.preventDefault();
+            const email = emailInput.value;
+            const senha = senhaInput.value;
+
+            if (usuarios[email] && usuarios[email] === senha) {
+                mensagem.style.display = 'none';
+                sucesso.style.display = 'block';
+
+                setTimeout(() => {
+                    window.location.href = 'https://bielbielbiel18.github.io/SITE-FINALIZADO/';
+                }, 1000);
+            } else {
+                sucesso.style.display = 'none';
+                mensagem.style.display = 'block';
+            }
+        });
+    </script>
+
+</body>
+
+</html>
