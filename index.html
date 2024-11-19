@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 
 <head>
     <meta charset="UTF-8">
@@ -7,214 +7,419 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap">
-    <title>ENTRAR</title>
+    <link rel="stylesheet" href="css/style.css">
+    <title>Painel do Usuário</title>
     <style>
         body {
             font-family: 'Poppins', sans-serif;
             background-color: #f2e6f2;
             color: #333;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
             margin: 0;
             padding: 20px;
-            box-sizing: border-box;
         }
 
-        a {
-            text-decoration: none;
-            color: #FF69B4;
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #FF69B4;
+            padding: 15px 30px;
+            color: white;
         }
 
-        #login {
+        .hamburger {
+            font-size: 1.5rem;
+            margin: 0;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .content {
+            text-align: center;
+            margin-top: 20px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .sections-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        .qr-section,
+        .tutorial-section,
+        .quiz-section {
+            margin: 0 10px;
+            padding: 15px;
+            background: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            flex: 1;
+            min-width: 280px;
+            margin-bottom: 20px;
+        }
+
+        .qr-section h1,
+        .tutorial-section h1,
+        .quiz-section h1 {
+            font-size: 1.5rem;
+        }
+
+        .qr-section p,
+        .tutorial-section p,
+        .quiz-section p {
+            margin: 10px 0;
+        }
+
+        .code-input {
+            margin-top: 20px;
             display: flex;
             justify-content: center;
             align-items: center;
-            text-align: center;
-            flex-direction: column;
-            width: 100%;
         }
 
-        .caixa {
-            background-color: #fff;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            width: 100%;
-            max-width: 350px;
+        .code-input input {
+            padding: 10px;
+            border: 2px solid #FF69B4;
+            border-radius: 5px;
+            width: 180px;
+            margin-right: 10px;
+            transition: border-color 0.3s;
         }
 
-        .email input,
-        .senha input {
-            border-radius: 15px;
-            border: none;
-            width: 100%;
-            max-width: 300px;
-            height: 45px;
-            padding-left: 15px;
-            background-color: #ff85c0;
-            color: #ffffff;
-            margin-bottom: 15px;
+        .code-input input:focus {
+            outline: none;
+            border-color: #ff1493;
         }
 
-        .senha {
-            position: relative;
-            margin-bottom: 10px;
-        }
-
-        #toggleLabel {
-            font-size: 0.9rem;
-            color: #333;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            margin-top: 15px;
-            gap: 5px;
-        }
-
-        #togglePassword {
-            margin-right: 5px;
-            width: 15px;
-            height: 15px;
-        }
-
-        .entrar input {
-            cursor: pointer;
-            width: 100%;
-            max-width: 150px;
-            height: 45px;
-            border-radius: 20px;
+        .code-input button {
+            padding: 10px 20px;
             border: none;
             background-color: #FF69B4;
             color: #ffffff;
-            margin-top: 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
         }
 
-        input::placeholder {
-            color: #ffffff;
+        .code-input button:hover {
+            background-color: #ff1493;
         }
 
-        h1 {
-            color: #FF69B4;
-            margin-bottom: 20px;
-            font-size: 1.8rem;
+        #message {
+            margin-top: 20px;
+            font-size: 1.2em;
+            color: #666;
         }
 
-        input:focus {
-            outline: none;
+        .verification-section {
+            text-align: center;
+            margin-top: 30px;
         }
 
-        p {
-            margin-top: 15px;
-            font-size: 0.9rem;
+        #video {
+            width: 100%;
+            max-width: 400px;
+            border: 2px solid #FF69B4;
+            border-radius: 10px;
+            display: none;
         }
 
-        /* Ajustes para telas menores */
-        @media (max-width: 600px) {
-            .caixa {
-                padding: 20px;
+        #verificationMessage {
+            display: none;
+            margin-top: 10px;
+            font-size: 1.2em;
+            color: #666;
+        }
+
+        .start-webcam-button {
+            background-color: #FF69B4;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            font-size: 1rem;
+            margin-top: 10px;
+        }
+
+        .start-webcam-button:hover {
+            background-color: #ff1493;
+        }
+
+        .form-button {
+            background-color: #FF69B4;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            font-size: 1rem;
+            margin-top: 10px;
+        }
+
+        .form-button:hover {
+            background-color: #ff1493;
+        }
+
+        .calendar-section {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .calendar-section h1 {
+            font-size: 1.5rem;
+        }
+
+        .calendar {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 10px;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .calendar-day {
+            padding: 15px;
+            background-color: #f1f1f1;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .calendar-day:hover {
+            background-color: #FF69B4;
+            color: white;
+        }
+
+        .calendar-day.active {
+            background-color: #FF69B4;
+            color: white;
+        }
+
+        .calendar-day span {
+            font-size: 1.2rem;
+        }
+
+        .calendar-day p {
+            margin-top: 5px;
+            font-size: 0.8rem;
+            color: #555;
+        }
+
+        @media (max-width: 768px) {
+            header {
+                padding: 10px 20px;
             }
 
-            h1 {
-                font-size: 1.5rem;
+            .hamburger {
+                font-size: 1.2rem;
             }
 
-            .entrar input {
-                max-width: 100%;
-                height: 40px;
+            .content {
+                padding: 15px;
             }
 
-            .email input,
-            .senha input {
-                height: 40px;
+            .qr-section h1,
+            .tutorial-section h1,
+            .quiz-section h1 {
+                font-size: 1.2rem;
             }
 
-            p {
-                font-size: 0.85rem;
+            .code-input input {
+                width: 150px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header {
+                padding: 8px 15px;
+            }
+
+            .hamburger {
+                font-size: 1rem;
+            }
+
+            .content {
+                padding: 10px;
+            }
+
+            .qr-section h1,
+            .tutorial-section h1,
+            .quiz-section h1 {
+                font-size: 1rem;
+            }
+
+            .code-input input {
+                width: 120px;
             }
         }
     </style>
 </head>
 
-<body id="principal">
+<body>
+    <header>
+        <h1 class="hamburger" id="hamburger">Painel do Usuário</h1>
+    </header>
 
-    <div id="login">
-        <div class="caixa">
-            <h1>LOGIN</h1>
+    <div class="content">
+        <p>LogiPort: Sua rota segura e eficiente!</p>
 
-            <div class="email">
-                <input type="email" id="email" placeholder="Email">
+        <div class="sections-container">
+            <!-- Widget do QR Code -->
+            <div class="qr-section">
+                <h1>Direcionamento para Gate</h1>
+                <p>Insira o número do seu ticket abaixo para ser direcionado ao seu gate:</p>
+                <div class="code-input">
+                    <input type="text" id="ticketCode" placeholder="Ex: 123456-GT1">
+                    <button onclick="redirectToGate()">Ver Mapa</button>
+                </div>
+                <div id="message"></div>
             </div>
 
-            <div class="senha">
-                <input type="password" id="senha" placeholder="Senha">
-                <label for="togglePassword" id="toggleLabel">
-                    <input type="checkbox" id="togglePassword"> Mostrar senha
-                </label>
+            <!-- Seção de Tutorial -->
+            <div class="tutorial-section">
+                <h1>Tutorial</h1>
+                <p>Assista ao vídeo abaixo para aprender como utilizar a plataforma:</p>
+                <button class="form-button" id="startTutorialButton">Iniciar Tutorial</button>
+                <iframe width="100%" height="auto" id="tutorialVideo" src="https://www.youtube.com/embed/625CLIT5TnI" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="display:none"></iframe>
             </div>
 
-            <div class="entrar">
-                <p>É prestador de serviços da DP World? <a href="cadastro.html">Use a nossa plataforma.</a></p>
-                <input type="submit" id="loginBtn" value="Entrar">
+            <!-- Seção de Quiz -->
+            <div class="quiz-section">
+                <h1>Integração do Motorista</h1>
+                <p>Preencha o formulário de integração para tornar-se um motorista verificado.</p>
+                <button class="form-button" onclick="window.open('https://forms.office.com/r/5zGRiZrE3J')">Formulário</button>
+                <p>Aperte o botão acima para acessar o formulário.</p>
             </div>
+        </div>
 
-            <p id="mensagem" style="color: red; display: none;">Email ou senha inválidos!</p>
-            <p id="sucesso" style="color: green; display: none;">Bem-vindo!</p>
+        <!-- Seção de Verificação -->
+        <div class="verification-section">
+            <h1>Reconhecimento Facial</h1>
+            <button class="start-webcam-button" id="startWebcamButton">Iniciar Webcam</button>
+            <video id="video" autoplay></video>
+            <div id="verificationMessage">Você está verificado!</div>
+            <div id="agendamentoMessage" style="display:none;">
+                <p><strong>Reconhecimento Facial Concluído com Sucesso!</strong></p>
+                <p>Código de Agendamento: <span id="agendamentoCode">123456</span></p>
+            </div>
+        </div>
+
+        <!-- Seção de Calendário -->
+        <div class="calendar-section">
+            <h1>Calendário de Agendamentos</h1>
+            <div class="calendar" id="calendar"></div>
+            <div id="calendarDetails" style="display:none; margin-top: 20px;">
+                <h3>Detalhes do Agendamento:</h3>
+                <p id="calendarAgendamentoDetails">Nenhum agendamento para este dia.</p>
+            </div>
         </div>
     </div>
 
     <script>
-        const usuarios = {
-            "ana.lima@gmail.com": "AnaLima123!",
-            "carlos.souza@gmail.com": "CarlosSouza456!",
-            "mariana.oliveira@gmail.com": "MarianaOliveira789!",
-            "joao.silva@gmail.com": "JoaoSilva012!",
-            "leticia.fernandes@gmail.com": "LeticiaFernandes345!",
-            "gabriel.pereira@gmail.com": "GabrielPereira678!",
-            "maria.santos@gmail.com": "MariaSantos901!",
-            "roberto.almeida@gmail.com": "RobertoAlmeida234!",
-            "fernanda.lima@gmail.com": "FernandaLima567!",
-            "teste.banca@gmail.com": "EquipeRosa"
-        };
+        // Função para redirecionar para o gate
+        function redirectToGate() {
+            const code = document.getElementById('ticketCode').value;
+            const message = document.getElementById('message');
+            const regex = /^\d{6}-GT[1-3]$/; // Alterei para garantir que o gate só pode ser GT1, GT2 ou GT3
 
-        const loginBtn = document.getElementById('loginBtn');
-        const emailInput = document.getElementById('email');
-        const senhaInput = document.getElementById('senha');
-        const mensagem = document.getElementById('mensagem');
-        const sucesso = document.getElementById('sucesso');
-        const togglePassword = document.getElementById('togglePassword');
-
-        togglePassword.addEventListener('click', function () {
-            const type = senhaInput.getAttribute('type') === 'password' ? 'text' : 'password';
-            senhaInput.setAttribute('type', type);
-        });
-
-        loginBtn.addEventListener('click', function (e) {
-            e.preventDefault();
-            const email = emailInput.value.trim(); // Removi o toLowerCase() aqui
-            const senha = senhaInput.value.trim();
-
-            // Checar se o email existe e se a senha está correta
-            if (usuarios[email] && usuarios[email] === senha) {
-                mensagem.style.display = 'none';
-                sucesso.style.display = 'block';
-
-                setTimeout(() => {
-                    window.location.href = 'https://bielbielbiel18.github.io/PainelDoUsuario/';
-                }, 1000);
+            if (regex.test(code)) {
+                const gate = code.split('-')[1];
+                message.textContent = `Redirecionando para o Gate ${gate}...`;
+                window.open("https://www.google.com.br/maps/@-23.9122999,-46.3130714,1202m/data=!3m1!1e3?entry=ttu", "_blank");
             } else {
-                sucesso.style.display = 'none';
-                mensagem.style.display = 'block';
+                message.textContent = "Código de ticket inválido. Por favor, insira um código no formato correto (ex: 123456-GT1).";
+                message.style.color = "red";
             }
-        });
-    </script>
+        }
 
+        // Função para iniciar o tutorial
+        document.getElementById('startTutorialButton').addEventListener('click', () => {
+            const video = document.getElementById('tutorialVideo');
+            video.style.display = 'block';
+            video.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
+        });
+
+        // Função para gerar e exibir o calendário
+        function generateCalendar() {
+            const calendar = document.getElementById('calendar');
+            const currentMonth = new Date(2024, 10); // Novembro de 2024
+            const firstDay = new Date(currentMonth.getFullYear(), currentMonth.getMonth(), 1).getDay();
+            const lastDate = new Date(currentMonth.getFullYear(), currentMonth.getMonth() + 1, 0).getDate();
+
+            let day = 1;
+            const events = {};
+            const companyNames = [
+                "Transportadora Nova",
+                "Logística Rápida",
+                "Frete Seguro",
+                "Expresso Global",
+                "Transporte Eficiente",
+                "Logística Intercontinental"
+            ];
+
+            // Adicionando agendamentos aleatórios
+            for (let i = 0; i < 10; i++) {
+                let randomDay = Math.floor(Math.random() * (lastDate - 1)) + 1;
+                let gateNumber = `GT${Math.floor(Math.random() * 3) + 1}`; // Gates de 1 a 3
+                events[randomDay] = {
+                    company: companyNames[i % companyNames.length], // Nome fictício para empresa
+                    gate: gateNumber,
+                    time: `${Math.floor(Math.random() * 10) + 8}:${Math.floor(Math.random() * 60)}`.padStart(5, '0')
+                };
+            }
+
+            for (let i = 0; i < 6; i++) {
+                for (let j = 0; j < 7; j++) {
+                    const div = document.createElement('div');
+                    div.className = 'calendar-day';
+
+                    if (i === 0 && j < firstDay) {
+                        div.innerHTML = '';
+                    } else if (day <= lastDate) {
+                        const event = events[day];
+                        div.innerHTML = `
+                            <span>${day}</span>
+                            <p>${event ? `Empresa: ${event.company}<br>Hora: ${event.time}<br>Gate: ${event.gate}` : 'Sem agendamento'}</p>
+                        `;
+                        div.addEventListener('click', () => {
+                            if (event) {
+                                document.getElementById('calendarAgendamentoDetails').textContent = `
+                                    Agendamento para o dia ${day}:
+                                    ${event.company} - ${event.time} - ${event.gate}
+                                `;
+                            } else {
+                                document.getElementById('calendarAgendamentoDetails').textContent = `Nenhum agendamento para este dia.`;
+                            }
+                            document.getElementById('calendarDetails').style.display = 'block';
+                        });
+                        day++;
+                    }
+
+                    calendar.appendChild(div);
+                }
+            }
+        }
+
+        // Gerar o calendário ao carregar a página
+        generateCalendar();
+
+        // Função para mostrar a mensagem de boas-vindas por 5 segundos
+        setTimeout(() => {
+            document.querySelector('p').style.display = 'none';
+        }, 5000);
+    </script>
 </body>
 
 </html>
